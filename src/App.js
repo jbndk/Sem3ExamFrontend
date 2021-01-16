@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react"
 import facade from "./apiFacade";
 import HotelsPage from './hotels';
 import NewBookingPage from './newBooking';
-import DestinationPage from './destination';
 import ProfilePage from './myprofile';
-import FavouritePage from './favourites';
 import ManagePage from './manage';
 import NewUserPage from './createNewUser';
 import {
@@ -13,11 +11,6 @@ import {
   Switch,
   Route,
   NavLink,
-  useParams,
-  useRouteMatch,
-  Prompt,
-  Link,
-  useHistory
 } from "react-router-dom";
 
 function LogIn({ login, errorMessage, setErrorMessage }) {
@@ -81,8 +74,6 @@ function Header({ isLoggedin, loginMsg, isAdmin }) {
       {isLoggedin && (
         <>
         <li><NavLink activeClassName="active" to="/myprofile">My Profile</NavLink></li>
-        <li><NavLink activeClassName="active" to="/favourites">Favourites</NavLink></li>
-        <li><NavLink activeClassName="active" to="/destination">Destination</NavLink></li>
         <li><NavLink activeClassName="active" to="/hotels">All hotels</NavLink></li>
         <li><NavLink activeClassName="active" to="/newbooking">New booking</NavLink></li>
         <li><NavLink activeClassName="active" to="/manage">Manage</NavLink></li>
@@ -152,10 +143,6 @@ function App() {
         {loggedIn ? <MyProfile /> : <AccessDenied />}     
         </Route>
 
-        <Route exact path="/destination">
-        {loggedIn ? <Destination /> : <AccessDenied />}          
-        </Route>
-
         <Route exact path="/hotels">
         {loggedIn ? <Hotels /> : <AccessDenied />}          
         </Route>
@@ -166,10 +153,6 @@ function App() {
 
         <Route exact path="/manage">
         {loggedIn ? <Manage /> : <AccessDenied />}          
-        </Route>
-
-        <Route exact path="/favourites">
-          {loggedIn ? <Favourites /> : <AccessDenied />}
         </Route>
 
         <Route exact path="/addNewUser">
@@ -206,26 +189,10 @@ function MyProfile() {
   );
 }
 
-function Destination() {
-  return (
-    <div>
-      <DestinationPage />
-    </div>
-  );
-}
-
 function Hotels() {
   return (
     <div>
       <HotelsPage />
-    </div>
-  );
-}
-
-function Favourites() {
-  return (
-    <div>
-      <FavouritePage />
     </div>
   );
 }
